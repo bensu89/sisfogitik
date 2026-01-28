@@ -151,60 +151,60 @@ export default function TeknisiDashboard() {
         <div className="space-y-6">
             {/* Header */}
             <div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-3">
-                    <Wrench className="w-8 h-8 text-indigo-600" />
+                <h1 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2 lg:gap-3">
+                    <Wrench className="w-6 h-6 lg:w-8 lg:h-8 text-indigo-600" />
                     Tiket Ditugaskan
                 </h1>
-                <p className="text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-sm lg:text-base text-gray-500 dark:text-gray-400 mt-1">
                     Daftar tiket yang ditugaskan kepada Anda
                 </p>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <Card padding="md">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/20 rounded-xl flex items-center justify-center">
-                            <Clock className="w-6 h-6 text-amber-600" />
+            {/* Stats - 2x2 on mobile */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+                <Card padding="sm" className="lg:p-6">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-center gap-2 lg:gap-4">
+                        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-amber-100 dark:bg-amber-900/20 rounded-xl flex items-center justify-center">
+                            <Clock className="w-5 h-5 lg:w-6 lg:h-6 text-amber-600" />
                         </div>
-                        <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Perlu Ditangani</p>
-                            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{activeTickets.length}</p>
+                        <div className="text-center lg:text-left">
+                            <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Perlu Ditangani</p>
+                            <p className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-gray-100">{activeTickets.length}</p>
                         </div>
                     </div>
                 </Card>
-                <Card padding="md">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-xl flex items-center justify-center">
-                            <PlayCircle className="w-6 h-6 text-blue-600" />
+                <Card padding="sm" className="lg:p-6">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-center gap-2 lg:gap-4">
+                        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-blue-100 dark:bg-blue-900/20 rounded-xl flex items-center justify-center">
+                            <PlayCircle className="w-5 h-5 lg:w-6 lg:h-6 text-blue-600" />
                         </div>
-                        <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Sedang Dikerjakan</p>
-                            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        <div className="text-center lg:text-left">
+                            <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Dikerjakan</p>
+                            <p className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-gray-100">
                                 {tickets.filter(t => t.status === 'in_progress').length}
                             </p>
                         </div>
                     </div>
                 </Card>
-                <Card padding="md">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center">
-                            <CheckCircle className="w-6 h-6 text-emerald-600" />
+                <Card padding="sm" className="lg:p-6">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-center gap-2 lg:gap-4">
+                        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-emerald-100 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center">
+                            <CheckCircle className="w-5 h-5 lg:w-6 lg:h-6 text-emerald-600" />
                         </div>
-                        <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Selesai Hari Ini</p>
-                            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{resolvedToday}</p>
+                        <div className="text-center lg:text-left">
+                            <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Hari Ini</p>
+                            <p className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-gray-100">{resolvedToday}</p>
                         </div>
                     </div>
                 </Card>
-                <Card padding="md">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-xl flex items-center justify-center">
-                            <CheckCircle className="w-6 h-6 text-purple-600" />
+                <Card padding="sm" className="lg:p-6">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-center gap-2 lg:gap-4">
+                        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-purple-100 dark:bg-purple-900/20 rounded-xl flex items-center justify-center">
+                            <CheckCircle className="w-5 h-5 lg:w-6 lg:h-6 text-purple-600" />
                         </div>
-                        <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Minggu Ini</p>
-                            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{resolvedThisWeek}</p>
+                        <div className="text-center lg:text-left">
+                            <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Minggu Ini</p>
+                            <p className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-gray-100">{resolvedThisWeek}</p>
                         </div>
                     </div>
                 </Card>
@@ -245,49 +245,61 @@ export default function TeknisiDashboard() {
                     </Card>
                 ) : (
                     displayedTickets.map((ticket) => (
-                        <Card key={ticket.id} padding="md" className="hover:shadow-md transition-shadow">
-                            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                                {/* Ticket Info */}
-                                <div className="flex-1 min-w-0">
-                                    <div className="flex items-start gap-3">
-                                        <div
-                                            className="w-3 h-3 rounded-full mt-2 shrink-0"
-                                            style={{ backgroundColor: ticket.category?.color || '#6366f1' }}
-                                        />
-                                        <div className="min-w-0">
+                        <Card key={ticket.id} padding="sm" className="lg:p-6 hover:shadow-md transition-shadow">
+                            <div className="flex flex-col gap-3 lg:gap-4">
+                                <div className="flex items-start gap-3">
+                                    <div
+                                        className="w-2.5 h-2.5 lg:w-3 lg:h-3 rounded-full mt-1.5 lg:mt-2 shrink-0"
+                                        style={{ backgroundColor: ticket.category?.color || '#6366f1' }}
+                                    />
+                                    <div className="min-w-0 flex-1">
+                                        <div className="flex items-start justify-between gap-2">
                                             <Link
                                                 href={`/dashboard/tickets/${ticket.id}`}
-                                                className="text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-indigo-600 transition-colors block truncate"
+                                                className="text-base lg:text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-indigo-600 transition-colors block line-clamp-1"
                                             >
                                                 {ticket.title}
                                             </Link>
-                                            <p className="text-gray-500 text-sm line-clamp-2 mt-1">
-                                                {ticket.description}
-                                            </p>
-                                            <div className="flex flex-wrap items-center gap-2 mt-2">
+                                            <div className="lg:hidden shrink-0">
                                                 {getStatusBadge(ticket.status)}
-                                                {getPriorityBadge(ticket.priority)}
-                                                {ticket.category && (
-                                                    <span className="text-xs text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
-                                                        {ticket.category.name}
-                                                    </span>
-                                                )}
-                                                <span className="text-xs text-gray-400">
-                                                    dari {ticket.reporter?.full_name || 'Unknown'}
-                                                </span>
                                             </div>
+                                        </div>
+                                        <p className="text-gray-500 text-xs lg:text-sm line-clamp-2 mt-0.5 lg:mt-1">
+                                            {ticket.description}
+                                        </p>
+
+                                        <div className="flex flex-wrap items-center gap-2 mt-2 lg:mt-3">
+                                            <div className="hidden lg:block">
+                                                {getStatusBadge(ticket.status)}
+                                            </div>
+                                            {getPriorityBadge(ticket.priority)}
+                                            {ticket.category && (
+                                                <span className="text-xs text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                                                    {ticket.category.name}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className="mt-2 flex items-center gap-2 text-xs text-gray-400">
+                                            <span>
+                                                Pelapor: {ticket.reporter?.full_name?.split(' ')[0] || 'Unknown'}
+                                            </span>
+                                            <span>•</span>
+                                            <span>
+                                                {new Date(ticket.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Quick Actions */}
-                                <div className="flex items-center gap-2 shrink-0">
+                                {/* Quick Actions - Mobile friendly */}
+                                <div className="flex items-center gap-2 pt-3 border-t border-gray-100 dark:border-gray-800 overflow-x-auto pb-1">
                                     {ticket.status === 'open' && (
                                         <Button
                                             size="sm"
                                             variant="outline"
                                             onClick={() => updateTicketStatus(ticket.id, 'in_progress')}
                                             isLoading={updatingTicket === ticket.id}
+                                            className="flex-shrink-0"
                                         >
                                             <PlayCircle className="w-4 h-4 mr-1" />
                                             Kerjakan
@@ -299,6 +311,7 @@ export default function TeknisiDashboard() {
                                             variant="primary"
                                             onClick={() => updateTicketStatus(ticket.id, 'resolved')}
                                             isLoading={updatingTicket === ticket.id}
+                                            className="flex-shrink-0"
                                         >
                                             <CheckCircle className="w-4 h-4 mr-1" />
                                             Selesai
@@ -308,12 +321,15 @@ export default function TeknisiDashboard() {
                                         size="sm"
                                         variant="ghost"
                                         onClick={() => setSelectedTicket(ticket)}
+                                        className="shrink-0"
                                     >
-                                        <MessageSquare className="w-4 h-4" />
+                                        <MessageSquare className="w-4 h-4 mr-1" />
+                                        Komen
                                     </Button>
-                                    <Link href={`/dashboard/teknisi/ticket/${ticket.id}`}>
-                                        <Button size="sm" variant="ghost">
-                                            <ExternalLink className="w-4 h-4" />
+                                    <Link href={`/dashboard/teknisi/ticket/${ticket.id}`} className="ml-auto">
+                                        <Button size="sm" variant="ghost" className="shrink-0">
+                                            Detail
+                                            <ExternalLink className="w-4 h-4 ml-1" />
                                         </Button>
                                     </Link>
                                 </div>

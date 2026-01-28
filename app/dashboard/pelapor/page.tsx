@@ -59,11 +59,11 @@ export default function PelaporDashboard() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-3">
-                        <Folder className="w-8 h-8 text-indigo-600" />
+                    <h1 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2 lg:gap-3">
+                        <Folder className="w-6 h-6 lg:w-8 lg:h-8 text-indigo-600" />
                         Tiket Saya
                     </h1>
-                    <p className="text-gray-500 dark:text-gray-400 mt-1">
+                    <p className="text-sm lg:text-base text-gray-500 dark:text-gray-400 mt-1">
                         Kelola dan pantau status tiket yang Anda buat
                     </p>
                 </div>

@@ -86,50 +86,50 @@ export default function AdminDashboard() {
     const unassignedTickets = tickets.filter(t => !t.assignee_id && t.status === 'open')
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-4 lg:space-y-6">
             {/* Header */}
             <div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-3">
-                    <Ticket className="w-8 h-8 text-indigo-600" />
+                <h1 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2 lg:gap-3">
+                    <Ticket className="w-6 h-6 lg:w-8 lg:h-8 text-indigo-600" />
                     Kelola Tiket
                 </h1>
-                <p className="text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-sm lg:text-base text-gray-500 dark:text-gray-400 mt-1">
                     Lihat semua tiket dan tugaskan ke teknisi
                 </p>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Card padding="md">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-red-100 dark:bg-red-900/20 rounded-xl flex items-center justify-center">
-                            <Ticket className="w-6 h-6 text-red-600" />
+            {/* Quick Stats - horizontal scroll on mobile */}
+            <div className="grid grid-cols-3 gap-2 lg:gap-4">
+                <Card padding="sm" className="lg:p-6">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-center gap-2 lg:gap-4">
+                        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-red-100 dark:bg-red-900/20 rounded-xl flex items-center justify-center">
+                            <Ticket className="w-5 h-5 lg:w-6 lg:h-6 text-red-600" />
                         </div>
-                        <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Belum Ditugaskan</p>
-                            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{unassignedTickets.length}</p>
-                        </div>
-                    </div>
-                </Card>
-                <Card padding="md">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-xl flex items-center justify-center">
-                            <Users className="w-6 h-6 text-blue-600" />
-                        </div>
-                        <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Teknisi Aktif</p>
-                            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{teknisiList.length}</p>
+                        <div className="text-center lg:text-left">
+                            <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Belum Ditugaskan</p>
+                            <p className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-gray-100">{unassignedTickets.length}</p>
                         </div>
                     </div>
                 </Card>
-                <Card padding="md">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center">
-                            <BarChart3 className="w-6 h-6 text-emerald-600" />
+                <Card padding="sm" className="lg:p-6">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-center gap-2 lg:gap-4">
+                        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-blue-100 dark:bg-blue-900/20 rounded-xl flex items-center justify-center">
+                            <Users className="w-5 h-5 lg:w-6 lg:h-6 text-blue-600" />
                         </div>
-                        <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Total Tiket</p>
-                            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{tickets.length}</p>
+                        <div className="text-center lg:text-left">
+                            <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Teknisi</p>
+                            <p className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-gray-100">{teknisiList.length}</p>
+                        </div>
+                    </div>
+                </Card>
+                <Card padding="sm" className="lg:p-6">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-center gap-2 lg:gap-4">
+                        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-emerald-100 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center">
+                            <BarChart3 className="w-5 h-5 lg:w-6 lg:h-6 text-emerald-600" />
+                        </div>
+                        <div className="text-center lg:text-left">
+                            <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">Total</p>
+                            <p className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-gray-100">{tickets.length}</p>
                         </div>
                     </div>
                 </Card>
@@ -144,16 +144,16 @@ export default function AdminDashboard() {
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="space-y-4">
+                        <div className="space-y-3 lg:space-y-4">
                             {unassignedTickets.slice(0, 5).map((ticket) => (
-                                <div key={ticket.id} className="flex items-center justify-between p-4 bg-white dark:bg-gray-900 rounded-xl">
-                                    <div className="flex-1">
-                                        <h4 className="font-medium text-gray-900 dark:text-gray-100">{ticket.title}</h4>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                                <div key={ticket.id} className="flex flex-col lg:flex-row lg:items-center lg:justify-between p-3 lg:p-4 bg-white dark:bg-gray-900 rounded-xl gap-3">
+                                    <div className="flex-1 min-w-0">
+                                        <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm lg:text-base truncate">{ticket.title}</h4>
+                                        <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
                                             {ticket.reporter?.full_name} • {new Date(ticket.created_at).toLocaleDateString('id-ID')}
                                         </p>
                                     </div>
-                                    <div className="flex items-center gap-3">
+                                    <div className="flex items-center gap-2 lg:gap-3">
                                         <Select
                                             options={[
                                                 { value: '', label: 'Pilih Teknisi' },
@@ -164,7 +164,7 @@ export default function AdminDashboard() {
                                                     handleAssign(ticket.id, e.target.value)
                                                 }
                                             }}
-                                            className="w-48"
+                                            className="flex-1 lg:w-48"
                                         />
                                     </div>
                                 </div>
