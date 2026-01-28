@@ -227,7 +227,7 @@ export default function TeknisiTicketAction() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pb-32">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pb-10">
             {/* Header - Fixed */}
             <div className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3">
                 <div className="flex items-center gap-3">
@@ -389,41 +389,45 @@ export default function TeknisiTicketAction() {
                         </div>
                     </div>
                 )}
-            </div>
 
-            {/* Fixed Bottom Action Buttons */}
-            <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-4 space-y-3">
-                {ticket.status === 'open' && (
-                    <Button
-                        size="lg"
-                        variant="outline"
-                        className="w-full h-14 text-lg font-semibold"
-                        onClick={() => updateTicketStatus('in_progress')}
-                        isLoading={isUpdating}
-                    >
-                        <PlayCircle className="w-6 h-6 mr-2" />
-                        Mulai Kerjakan
-                    </Button>
-                )}
+                {/* Action Buttons */}
+                <div className="space-y-3 pt-2">
+                    {ticket.status === 'open' && (
+                        <Button
+                            size="lg"
+                            variant="outline"
+                            className="w-full h-14 text-lg font-semibold"
+                            onClick={() => updateTicketStatus('in_progress')}
+                            isLoading={isUpdating}
+                        >
+                            <PlayCircle className="w-6 h-6 mr-2" />
+                            Mulai Kerjakan
+                        </Button>
+                    )}
 
-                {(ticket.status === 'open' || ticket.status === 'in_progress') && (
-                    <Button
-                        size="lg"
-                        className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700"
-                        onClick={() => updateTicketStatus('resolved', !!selectedImage)}
-                        isLoading={isUpdating}
-                    >
-                        <CheckCircle className="w-6 h-6 mr-2" />
-                        {selectedImage ? 'Selesai & Upload Foto' : 'Tandai Selesai'}
-                    </Button>
-                )}
+                    {(ticket.status === 'open' || ticket.status === 'in_progress') && (
+                        <Button
+                            size="lg"
+                            className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                            onClick={() => updateTicketStatus('resolved', !!selectedImage)}
+                            isLoading={isUpdating}
+                            disabled={!selectedImage || !comment.trim()}
+                        >
+                            <CheckCircle className="w-6 h-6 mr-2" />
+                            {selectedImage && comment.trim() ? 'Selesai & Upload Foto' : 'Lengkapi Foto & Komentar'}
+                        </Button>
+                    )}
 
-                {ticket.status === 'resolved' && (
-                    <div className="text-center py-4">
-                        <div className="text-5xl mb-2">✅</div>
-                        <p className="text-lg font-semibold text-emerald-600">Tiket Sudah Selesai</p>
-                    </div>
-                )}
+                    {ticket.status === 'resolved' && (
+                        <div className="text-center py-4 bg-emerald-50 dark:bg-emerald-900/10 rounded-2xl border border-emerald-100 dark:border-emerald-800">
+                            <div className="text-4xl mb-2">✅</div>
+                            <p className="text-lg font-semibold text-emerald-600 dark:text-emerald-400">Tiket Sudah Selesai</p>
+                            <p className="text-sm text-gray-500 mt-1">
+                                Diselesaikan pada {new Date(ticket.resolved_at!).toLocaleString('id-ID')}
+                            </p>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )

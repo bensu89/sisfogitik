@@ -43,14 +43,7 @@ export function Navbar({ user, onMenuClick }: NavbarProps) {
                         SIGIK
                     </h1>
 
-                    {/* Search - Desktop only */}
-                    <div className="hidden lg:block relative w-80">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                        <Input
-                            placeholder="Cari tiket, pengguna..."
-                            className="pl-10 py-2 bg-gray-50 dark:bg-gray-800 border-0"
-                        />
-                    </div>
+
                 </div>
 
                 {/* Right Section */}
