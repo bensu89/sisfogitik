@@ -1,25 +1,17 @@
 'use client'
 
 import { useEffect, useState, ReactNode } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Sidebar } from '@/components/shared/sidebar'
 import { Navbar } from '@/components/shared/navbar'
-import { MobileNav } from '@/components/shared/mobile-nav'
 import { supabase } from '@/lib/supabase'
 import { Profile } from '@/types'
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
     const router = useRouter()
-    const pathname = usePathname()
     const [user, setUser] = useState<Profile | null>(null)
     const [isLoading, setIsLoading] = useState(true)
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-    // Close mobile menu on route change
-    useEffect(() => {
-        setMobileMenuOpen(false)
-    }, [pathname])
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -121,53 +113,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-            {/* Desktop Sidebar - hidden on mobile */}
-            <div className="hidden lg:block">
-                <Sidebar user={user} isCollapsed={sidebarCollapsed} />
-            </div>
+            <Sidebar user={user} isCollapsed={sidebarCollapsed} />
+            <Navbar user={user} onMenuClick={() => setSidebarCollapsed(!sidebarCollapsed)} />
 
-            {/* Mobile Sidebar Overlay */}
-            {mobileMenuOpen && (
-                <div
-                    className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-                    onClick={() => setMobileMenuOpen(false)}
-                />
-            )}
-
-            {/* Mobile Sidebar */}
-            <div className={`
-                fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 lg:hidden
-                ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-            `}>
-                <Sidebar user={user} isCollapsed={false} />
-            </div>
-
-            {/* Navbar */}
-            <Navbar
-                user={user}
-                onMenuClick={() => {
-                    // On mobile, toggle mobile menu
-                    if (window.innerWidth < 1024) {
-                        setMobileMenuOpen(!mobileMenuOpen)
-                    } else {
-                        setSidebarCollapsed(!sidebarCollapsed)
-                    }
-                }}
-            />
-
-            {/* Main Content */}
-            <main className={`
-                pt-16 pb-20 lg:pb-6 transition-all duration-300
-                lg:${sidebarCollapsed ? 'ml-20' : 'ml-64'}
-                ${sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'}
-            `}>
-                <div className="p-4 lg:p-6">
+            <main className={`pt-16 transition-all duration-300 ${sidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
+                <div className="p-6">
                     {children}
                 </div>
             </main>
-
-            {/* Mobile Bottom Navigation */}
-            <MobileNav user={user} />
         </div>
     )
 }
