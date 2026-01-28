@@ -8,7 +8,8 @@ import {
     Ticket,
     Wrench,
     User,
-    Users
+    Users,
+    BarChart3
 } from 'lucide-react'
 import { Profile } from '@/types'
 
@@ -85,6 +86,11 @@ export function MobileNav({ user }: MobileNavProps) {
                     icon: Users,
                 },
                 {
+                    title: 'Laporan',
+                    href: '/dashboard/admin/reports',
+                    icon: BarChart3,
+                },
+                {
                     title: 'Profil',
                     href: '/dashboard/settings',
                     icon: User,
@@ -98,7 +104,7 @@ export function MobileNav({ user }: MobileNavProps) {
     const navItems = getNavItems()
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 lg:hidden safe-area-bottom">
+        <nav className="fixed bottom-0 left-0 right-0 z-[100] bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 lg:hidden safe-area-bottom">
             <div className="flex items-center justify-around h-16 px-2">
                 {navItems.map((item) => {
                     const isActive = pathname === item.href || pathname.startsWith(item.href + '/')

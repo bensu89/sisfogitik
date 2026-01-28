@@ -34,7 +34,7 @@ export function Navbar({ user, onMenuClick }: NavbarProps) {
                 {/* Left Section */}
                 <div className="flex items-center gap-3">
                     {/* Mobile Menu Button */}
-                    <Button variant="ghost" size="sm" onClick={onMenuClick} className="p-2">
+                    <Button variant="ghost" size="sm" onClick={onMenuClick} className="p-2 hidden lg:flex">
                         <Menu className="w-5 h-5" />
                     </Button>
 

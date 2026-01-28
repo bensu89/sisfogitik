@@ -4,6 +4,7 @@ import { useEffect, useState, ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { Sidebar } from '@/components/shared/sidebar'
 import { Navbar } from '@/components/shared/navbar'
+import { MobileNav } from '@/components/shared/mobile-nav'
 import { supabase } from '@/lib/supabase'
 import { Profile } from '@/types'
 
@@ -12,7 +13,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<Profile | null>(null)
     const [isLoading, setIsLoading] = useState(true)
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -111,11 +111,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     }
 
     const handleMenuClick = () => {
-        if (window.innerWidth < 1024) {
-            setMobileMenuOpen(!mobileMenuOpen)
-        } else {
-            setSidebarCollapsed(!sidebarCollapsed)
-        }
+        setSidebarCollapsed(!sidebarCollapsed)
     }
 
     return (
@@ -125,21 +121,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 <Sidebar user={user} isCollapsed={sidebarCollapsed} />
             </div>
 
-            {/* Mobile Sidebar Overlay */}
-            {mobileMenuOpen && (
-                <div
-                    className="fixed inset-0 bg-black/50 z-40 lg:hidden user-select-none"
-                    onClick={() => setMobileMenuOpen(false)}
-                />
-            )}
-
-            {/* Mobile Sidebar - fixed width, slides in */}
-            <div className={`
-                fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 lg:hidden
-                ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-            `}>
-                <Sidebar user={user} isCollapsed={false} />
-            </div>
+            {/* Mobile Sidebar Overlay and Drawer removed - replaced with MobileNav */}
+            <MobileNav user={user} />
 
             <Navbar
                 user={user}
@@ -147,7 +130,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             />
 
             <main className={`
-                pt-16 transition-all duration-300
+                pt-16 pb-20 lg:pb-0 transition-all duration-300
                 ${sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'}
             `}>
                 <div className="p-4 lg:p-6">
