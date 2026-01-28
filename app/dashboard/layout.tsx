@@ -12,6 +12,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<Profile | null>(null)
     const [isLoading, setIsLoading] = useState(true)
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -85,9 +86,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
         checkAuth()
 
-        // Subscribe to auth changes
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: any, session: any) => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: string, session: any) => {
             if (event === 'SIGNED_OUT' || !session) {
                 router.push('/login')
             }
@@ -111,13 +110,47 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         return null
     }
 
+    const handleMenuClick = () => {
+        if (window.innerWidth < 1024) {
+            setMobileMenuOpen(!mobileMenuOpen)
+        } else {
+            setSidebarCollapsed(!sidebarCollapsed)
+        }
+    }
+
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-            <Sidebar user={user} isCollapsed={sidebarCollapsed} />
-            <Navbar user={user} onMenuClick={() => setSidebarCollapsed(!sidebarCollapsed)} />
+            {/* Desktop Sidebar - hidden on mobile */}
+            <div className="hidden lg:block">
+                <Sidebar user={user} isCollapsed={sidebarCollapsed} />
+            </div>
 
-            <main className={`pt-16 transition-all duration-300 ${sidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
-                <div className="p-6">
+            {/* Mobile Sidebar Overlay */}
+            {mobileMenuOpen && (
+                <div
+                    className="fixed inset-0 bg-black/50 z-40 lg:hidden user-select-none"
+                    onClick={() => setMobileMenuOpen(false)}
+                />
+            )}
+
+            {/* Mobile Sidebar - fixed width, slides in */}
+            <div className={`
+                fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 lg:hidden
+                ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+            `}>
+                <Sidebar user={user} isCollapsed={false} />
+            </div>
+
+            <Navbar
+                user={user}
+                onMenuClick={handleMenuClick}
+            />
+
+            <main className={`
+                pt-16 transition-all duration-300
+                ${sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'}
+            `}>
+                <div className="p-4 lg:p-6">
                     {children}
                 </div>
             </main>
